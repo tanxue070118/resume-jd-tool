@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>简历岗位匹配评分器</title>
+    <meta
+      name="description"
+      content="粘贴简历和目标岗位 JD，快速查看匹配分、缺失关键词、简历优化建议和面试准备方向。"
+    />
+    <meta name="robots" content="index,follow" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="简历岗位匹配评分器">
+        <span class="brand-mark">R</span>
+        <span>简历岗位匹配评分器</span>
+      </a>
+      <nav class="site-nav" aria-label="主要导航">
+        <a href="#tool">开始评分</a>
+        <a href="./articles/">求职文章</a>
+        <a href="#method">评分逻辑</a>
+        <a href="#service">人工优化</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="section-label">求职材料检查工具</p>
+          <h1>先看简历和岗位到底差在哪里</h1>
+          <p>
+            粘贴你的简历和目标岗位 JD，工具会在本地分析关键词覆盖、经历表达和面试准备方向。
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#tool">立即评分</a>
+            <a class="button ghost" href="#sample">查看样例</a>
+          </div>
+        </div>
+        <div class="hero-visual" aria-label="评分结果预览">
+          <div class="score-ring">
+            <span id="preview-score">78</span>
+            <small>匹配分</small>
+          </div>
+          <div class="visual-bars">
+            <span style="--w: 86%"></span>
+            <span style="--w: 64%"></span>
+            <span style="--w: 72%"></span>
+            <span style="--w: 48%"></span>
+          </div>
+          <p>关键词、项目经历、技能表达和岗位方向会分开检查。</p>
+        </div>
+      </section>
+
+      <section class="ad-slot" aria-label="广告位">
+        <span>广告位</span>
+        <p>后续接入 Google AdSense。上线前保持空白，不放诱导点击内容。</p>
+      </section>
+
+      <section id="tool" class="tool-section">
+        <div class="section-heading">
+          <p class="section-label">分析工具</p>
+          <h2>粘贴内容，生成匹配报告</h2>
+          <p>所有分析在浏览器本地完成。提交前请删除手机号、邮箱、身份证号和住址。</p>
+        </div>
+
+        <div class="workspace">
+          <form class="input-panel" id="match-form">
+            <label for="resume-text">你的简历文本</label>
+            <textarea
+              id="resume-text"
+              rows="14"
+              placeholder="粘贴简历内容。建议包含教育背景、工作经历、项目经历、技能。"
+            ></textarea>
+
+            <label for="jd-text">目标岗位 JD</label>
+            <textarea
+              id="jd-text"
+              rows="14"
+              placeholder="粘贴招聘要求、岗位职责、任职资格。"
+            ></textarea>
+
+            <div class="form-actions">
+              <button class="button primary" type="submit">生成报告</button>
+              <button class="button secondary" type="button" id="load-sample">载入样例</button>
+              <button class="button text" type="button" id="clear-form">清空</button>
+            </div>
+          </form>
+
+          <aside class="result-panel" aria-live="polite">
+            <div class="result-topline">
+              <div>
+                <p class="muted">当前匹配分</p>
+                <strong id="score">0</strong>
+              </div>
+              <span id="score-label">等待分析</span>
+            </div>
+
+            <div class="meter" aria-hidden="true">
+              <span id="score-meter"></span>
+            </div>
+
+            <div class="result-block">
+              <h3>已覆盖关键词</h3>
+              <div class="tag-list" id="matched-tags">
+                <span>等待输入</span>
+              </div>
+            </div>
+
+            <div class="result-block">
+              <h3>建议补充关键词</h3>
+              <div class="tag-list warn" id="missing-tags">
+                <span>等待输入</span>
+              </div>
+            </div>
+
+            <div class="result-block">
+              <h3>优化建议</h3>
+              <ul id="advice-list">
+                <li>粘贴简历和岗位 JD 后，系统会给出可执行建议。</li>
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="sample" class="sample-section">
+        <div class="section-heading compact">
+          <p class="section-label">样例</p>
+          <h2>这类表达更容易被岗位关键词识别</h2>
+        </div>
+        <div class="comparison">
+          <article>
+            <h3>修改前</h3>
+            <p>负责社群运营，写推文，做活动，和用户沟通。</p>
+          </article>
+          <article>
+            <h3>修改后</h3>
+            <p>
+              负责 3 个社群的内容分发和活动提醒，整理用户反馈，支持月度活动报名转化。
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="method" class="method-section">
+        <div class="section-heading compact">
+          <p class="section-label">评分逻辑</p>
+          <h2>工具看三个维度</h2>
+        </div>
+        <div class="method-grid">
+          <article>
+            <span>01</span>
+            <h3>岗位关键词</h3>
+            <p>从 JD 中提取高频能力词、工具词和职责词，检查简历是否覆盖。</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>经历表达</h3>
+            <p>检查是否有项目、数据、结果、协作和业务场景，而不是只写负责事项。</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>面试准备</h3>
+            <p>根据缺失项提示后续该准备哪些项目说明、自我介绍和追问回答。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="service" class="service-section">
+        <div>
+          <p class="section-label">需要人工优化</p>
+          <h2>如果要直接投递，可以做一版岗位匹配优化</h2>
+          <p>
+            我们只优化真实经历的表达，不编造学历、公司、证书和项目结果，也不承诺 offer。
+          </p>
+        </div>
+        <div class="service-actions">
+          <a class="button primary" href="tencent://message/?uin=2797672742">QQ 咨询 2797672742</a>
+          <p>如果无法自动打开 QQ，请手动搜索 QQ：2797672742。</p>
+        </div>
+      </section>
+
+      <section class="privacy-section">
+        <h2>隐私提示</h2>
+        <p>
+          本页面不会把文本发送到服务器。使用前仍建议删除手机号、邮箱、身份证号、住址和账号密码。
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>简历岗位匹配评分器</p>
+      <div class="footer-links">
+        <a href="./articles/">求职文章</a>
+        <a href="./privacy.html">隐私政策</a>
+        <a href="./terms.html">使用条款</a>
+        <a href="#top">回到顶部</a>
+      </div>
+    </footer>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
